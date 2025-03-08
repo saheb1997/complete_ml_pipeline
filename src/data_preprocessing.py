@@ -83,8 +83,9 @@ def main(text_column='text', target_column='target'):
     """
     try:
         # Fetch the data from data/raw
-        train_data = pd.read_csv('/Users/libnfc43/Desktop/complete_ml_pipeline/data/raw/test.csv')
-        test_data = pd.read_csv('/Users/libnfc43/Desktop/complete_ml_pipeline/data/raw/test.csv')
+        train_data = pd.read_csv(r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\data\raw\train.csv')
+
+        test_data = pd.read_csv(r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\data\raw\test.csv')
         logger.debug('Data loaded properly')
 
         # Transform the data

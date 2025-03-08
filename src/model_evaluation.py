@@ -104,8 +104,8 @@ def save_metrics(metrics: dict, file_path: str):
 def main():
     try:
         params={'n_estimators': 25, 'random_state': 2}
-        clf =load_model('/Users/libnfc43/Desktop/complete_ml_pipeline/models/model.pkl')
-        test_data = load_data('/Users/libnfc43/Desktop/complete_ml_pipeline/data/processed/test_tfidf.csv')
+        clf =load_model(r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\models\model.pkl')
+        test_data = load_data(r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\data\processed\test_tfidf.csv')
 
         X_test = test_data.iloc[:,:-1].values
         y_test = test_data.iloc[:,-1].values
