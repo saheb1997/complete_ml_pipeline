@@ -50,6 +50,23 @@ def load_model(file_path: str):
         logger.error('Unexpected error occurred while loading the model: %s', e)
         raise
 
+def load_params(params_path: str) -> dict:
+    """Load parameters from a YAML file."""
+    try:
+        with open(params_path, 'r') as file:
+            params = yaml.safe_load(file)
+        logger.debug('Parameters retrieved from %s', params_path)
+        return params
+    except FileNotFoundError:
+        logger.error('File not found: %s', params_path)
+        raise
+    except yaml.YAMLError as e:
+        logger.error('YAML error: %s', e)
+        raise
+    except Exception as e:
+        logger.error('Unexpected error: %s', e)
+        raise
+
 def load_data(file_path: str) -> pd.DataFrame:
     """" Load data from a CSV file"""
     try:
@@ -103,7 +120,7 @@ def save_metrics(metrics: dict, file_path: str):
 
 def main():
     try:
-        params={'n_estimators': 25, 'random_state': 2}
+        params=load_params(params_path=r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\params.yaml')
         clf =load_model(r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\models\model.pkl')
         test_data = load_data(r'C:\Users\saheb\Desktop\complete_machine_learning _pipeline\data\processed\test_tfidf.csv')
 
@@ -112,7 +129,7 @@ def main():
 
         metrics = evaluate_model(clf,X_test,y_test)
 
-
+        #experiment tracking
         with Live(save_dvc_exp=True) as live:
             live.log_metric('accuracy', accuracy_score(y_test, y_test))
             live.log_metric('precision', precision_score(y_test, y_test))
